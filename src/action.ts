@@ -132,7 +132,7 @@ export async function run() {
                 const postname = match[2];
                 if (postname) {
                     const reqData = {
-                        delete: true
+                        delete: "true"
                     };
 
                     let formData = new FormData();

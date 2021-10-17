@@ -167,7 +167,7 @@ function run() {
                     postname = match[2];
                     if (!postname) return [3 /*break*/, 8];
                     reqData = {
-                        delete: true
+                        delete: "true"
                     };
                     formData = new form_data_1.default();
                     for (key in reqData) {
