@@ -93,17 +93,15 @@ export async function run() {
 
         }
 
-        info(JSON.stringify(added))
 
-
-        const regex = new RegExp(/(.*\/)(.*)(\.md)/gm);
+        const regex = new RegExp(/(posts\/)(.*)(\.md)/gm);
 
         for (let index = 0; index < added.length; index++) {
             const match = added[index].match(regex);
             if (match) {
                 const postname = match[1];
                 if (postname) {
-                    info(postname);
+                    info("Name of post: " + postname);
                     // https://app.sikhsaakhi.com/website/blog/new_post.php
 
                 }

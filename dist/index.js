@@ -114,14 +114,13 @@ function run() {
                                 core_1.setFailed("One of your files includes an unsupported file status '" + file.status + "', expected 'added'");
                         }
                     }
-                    core_1.info(JSON.stringify(added));
-                    regex = new RegExp(/(.*\/)(.*)(\.md)/gm);
+                    regex = new RegExp(/(posts\/)(.*)(\.md)/gm);
                     for (index = 0; index < added.length; index++) {
                         match = added[index].match(regex);
                         if (match) {
                             postname = match[1];
                             if (postname) {
-                                core_1.info(postname);
+                                core_1.info("Name of post: " + postname);
                                 // https://app.sikhsaakhi.com/website/blog/new_post.php
                             }
                         }
