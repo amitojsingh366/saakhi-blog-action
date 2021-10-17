@@ -98,10 +98,11 @@ export async function run() {
 
         for (let index = 0; index < added.length; index++) {
             const match = added[index].match(regex);
+            info("match: " + match)
             if (match) {
                 const postname = match[1];
                 if (postname) {
-                    info("Name of post: " + postname);
+                    info("postname: " + postname);
                     // https://app.sikhsaakhi.com/website/blog/new_post.php
 
                 }

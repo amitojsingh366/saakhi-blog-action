@@ -117,10 +117,11 @@ function run() {
                     regex = new RegExp(/(posts\/)(.*)(\.md)/gm);
                     for (index = 0; index < added.length; index++) {
                         match = added[index].match(regex);
+                        core_1.info("match: " + match);
                         if (match) {
                             postname = match[1];
                             if (postname) {
-                                core_1.info("Name of post: " + postname);
+                                core_1.info("postname: " + postname);
                                 // https://app.sikhsaakhi.com/website/blog/new_post.php
                             }
                         }
