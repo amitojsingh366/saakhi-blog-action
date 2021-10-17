@@ -93,7 +93,7 @@ export async function run() {
 
         }
 
-        info(added[0])
+        info(JSON.stringify(added))
 
 
         const regex = new RegExp(/(.*\/)(.*)(\.md)/gm);
