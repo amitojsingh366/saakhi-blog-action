@@ -3,17 +3,15 @@ import { context, getOctokit } from '@actions/github';
 import axios, { AxiosError } from 'axios';
 import matter from 'gray-matter';
 import path from 'path';
+import fs from 'fs';
 
 export async function run() {
     try {
         const token = getInput('github-token', { required: true });
-        // const url = getInput('request-url', { required: true });
-        // const secret = getInput('authorization-secret', { required: true });
-
+        const url = getInput('request-url', { required: true });
+        const secret = getInput('authorization-secret', { required: true });
         const client = getOctokit(token);
-
         const eventName = context.eventName;
-
 
         let base = ''
         let head = '';
@@ -76,7 +74,8 @@ export async function run() {
         }
 
 
-        const added: string[] = [];
+        const added: string[] = [],
+            removed: string[] = [];
 
         for (const file of files) {
             const filename = file.filename;
@@ -84,7 +83,9 @@ export async function run() {
                 case 'added':
                     added.push(filename)
                     break
-
+                case 'removed':
+                    removed.push(filename)
+                    break
                 default:
                     setFailed(
                         `One of your files includes an unsupported file status '${file.status}', expected 'added'`
@@ -93,20 +94,55 @@ export async function run() {
 
         }
 
-
-        const regex = new RegExp(/(posts\/)(.*)(\.md)/gm);
+        const regex = new RegExp(/(posts\/)(.*)(\.md)/);
 
         for (let index = 0; index < added.length; index++) {
             const match = added[index].match(regex);
-            info("match: " + match)
             if (match) {
-                const postname = match[1];
-                if (postname) {
+                const postpath = path.join(process.cwd(), match[0]);
+                const postname = match[2];
+                if (postname && postpath) {
                     info("postname: " + postname);
-                    // https://app.sikhsaakhi.com/website/blog/new_post.php
 
+                    const fileContents = fs.readFileSync(postpath, 'utf8')
+                    const { data } = matter(fileContents);
+
+                    const reqData = {
+                        id: postname,
+                        title: data.title,
+                        des: data.description,
+                        timestamp: data.timestamp,
+                        source: `https://github.com/gp1699/saakhi-blogs/blob/main/${match[0]}`
+                    }
+
+                    let formData = new FormData();
+                    for (let key in reqData) {
+                        formData.append(key, reqData[key])
+                    }
+
+                    await sendRequest(formData, url, secret);
                 }
             }
+        }
+
+        for (let index = 0; index < removed.length; index++) {
+            const match = removed[index].match(regex);
+            if (match) {
+                const postname = match[2];
+                if (postname) {
+                    const reqData = {
+                        delete: true
+                    };
+
+                    let formData = new FormData();
+                    for (let key in reqData) {
+                        formData.append(key, reqData[key])
+                    }
+
+                    await sendRequest(formData, url, secret);
+                }
+            }
+
         }
 
 
@@ -115,5 +151,10 @@ export async function run() {
         error(err as Error);
         setFailed((err as Error).message);
     }
+}
+
+
+async function sendRequest(data: FormData, url: string, secret: string) {
+    await axios.post(url, data, { headers: { 'Authorization': secret } });
 }
 
