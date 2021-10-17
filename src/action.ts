@@ -7,8 +7,8 @@ import path from 'path';
 export async function run() {
     try {
         const token = getInput('github-token', { required: true });
-        const url = getInput('request-url', { required: true });
-        const secret = getInput('authorization-secret', { required: true });
+        // const url = getInput('request-url', { required: true });
+        // const secret = getInput('authorization-secret', { required: true });
 
         const client = getOctokit(token);
 

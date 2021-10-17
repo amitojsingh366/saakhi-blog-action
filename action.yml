@@ -5,12 +5,12 @@ inputs:
   github-token:
     description: "The GITHUB_TOKEN secret"
     required: true
-  request-url:
-    description: "The URL that the payload is sent to"
-    required: true
-  authorization-secret:
-    description: "The secret used to validate requests"
-    required: true
+  # request-url:
+  #   description: "The URL that the payload is sent to"
+  #   required: true
+  # authorization-secret:
+  #   description: "The secret used to validate requests"
+  #   required: true
 
 runs:
   using: "node14"
