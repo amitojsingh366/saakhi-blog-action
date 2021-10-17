@@ -1,0 +1,22 @@
+{
+  "name": "@saakhi/blog-action",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "repository": "https://github.com/amitojsingh366/saakhi-blog-action",
+  "author": "Amitoj Singh",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && ncc build lib/index.js"
+  },
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@vercel/ncc": "^0.31.1",
+    "axios": "^0.23.0",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.1"
+  }
+}
