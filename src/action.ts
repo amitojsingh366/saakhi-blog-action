@@ -156,6 +156,8 @@ export async function run() {
 
 
 async function sendRequest(data: FormData, url: string, secret: string) {
-    await axios.post(url, data, { headers: { 'Authorization': secret } });
+    await axios.post(url, data, { headers: { 'Authorization': secret } }).then((resp) => {
+        info(resp.data as string)
+    })
 }
 
