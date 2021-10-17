@@ -121,8 +121,6 @@ export async function run() {
                         formData.append(key, reqData[key])
                     }
 
-                    formData.submit({ headers: })
-
                     await sendRequest(formData, url, secret);
                 }
             }
