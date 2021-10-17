@@ -132,6 +132,7 @@ export async function run() {
                 const postname = match[2];
                 if (postname) {
                     const reqData = {
+                        id: postname,
                         delete: "true"
                     };
 
