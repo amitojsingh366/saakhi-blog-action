@@ -197,7 +197,12 @@ function sendRequest(data, url, secret) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, axios_1.default.post(url, data, { headers: { 'Authorization': secret } }).then(function (resp) {
+                case 0: return [4 /*yield*/, axios_1.default.post(url, data, {
+                        headers: {
+                            'Authorization': secret,
+                            'Content-Type': 'multipart/form-data',
+                        }
+                    }).then(function (resp) {
                         core_1.info(JSON.stringify(resp.data));
                     })];
                 case 1:
