@@ -49,14 +49,12 @@ var github_1 = __nccwpck_require__(5438);
 function run() {
     var _a, _b, _c, _d;
     return __awaiter(this, void 0, void 0, function () {
-        var token, url, secret, client, eventName, base, head, response, files, added, _i, files_1, file, filename, regex, index, match, postname, err_1;
+        var token, client, eventName, base, head, response, files, added, _i, files_1, file, filename, regex, index, match, postname, err_1;
         return __generator(this, function (_e) {
             switch (_e.label) {
                 case 0:
                     _e.trys.push([0, 2, , 3]);
                     token = core_1.getInput('github-token', { required: true });
-                    url = core_1.getInput('request-url', { required: true });
-                    secret = core_1.getInput('authorization-secret', { required: true });
                     client = github_1.getOctokit(token);
                     eventName = github_1.context.eventName;
                     base = '';
