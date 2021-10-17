@@ -121,6 +121,8 @@ export async function run() {
                         formData.append(key, reqData[key])
                     }
 
+                    formData.submit({ headers: })
+
                     await sendRequest(formData, url, secret);
                 }
             }
@@ -156,13 +158,15 @@ export async function run() {
 
 
 async function sendRequest(data: FormData, url: string, secret: string) {
-    await axios.post(url, data, {
+    const formattedUrl = new URL(url);
+    data.submit({
+        path: formattedUrl.pathname,
+        hostname: formattedUrl.hostname,
+        host: formattedUrl.host,
+        method: 'POST',
         headers: {
-            'Authorization': secret,
-            'Content-Type': 'multipart/form-data',
+            'Authorization': secret
         }
-    }).then((resp) => {
-        info(JSON.stringify(resp.data))
     })
 }
 
