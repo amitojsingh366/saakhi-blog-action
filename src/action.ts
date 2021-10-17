@@ -4,6 +4,7 @@ import axios, { AxiosError } from 'axios';
 import matter from 'gray-matter';
 import path from 'path';
 import fs from 'fs';
+import FormData from 'form-data';
 
 export async function run() {
     try {
