@@ -87,12 +87,7 @@ export async function run() {
                 case 'removed':
                     removed.push(filename)
                     break
-                default:
-                    setFailed(
-                        `One of your files includes an unsupported file status '${file.status}', expected 'added'`
-                    )
             }
-
         }
 
         const regex = new RegExp(/(posts\/)(.*)(\.md)/);

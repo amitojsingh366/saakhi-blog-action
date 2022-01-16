@@ -122,8 +122,6 @@ function run() {
                             case 'removed':
                                 removed.push(filename);
                                 break;
-                            default:
-                                core_1.setFailed("One of your files includes an unsupported file status '" + file.status + "', expected 'added'");
                         }
                     }
                     regex = new RegExp(/(posts\/)(.*)(\.md)/);
